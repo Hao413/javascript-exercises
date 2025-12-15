@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Cart</title>
+
+    <style>
+        li {
+            margin-bottom: 10px;
+        }
+
+        li button {
+            font-size: 12px;
+            margin-left: 20px;
+            color: #666;
+        }
+    </style>
+    <!--  build a dynamic shopping list that allows you to add items 
+      using a form input and a button. After you type an item in the 
+      input field and click the button or press the Enter key, 
+      the following should happen:
+
+      1. The item should appear in the list.
+      2. Each item should have a button next to it that removes the 
+        item from the list when clicked.
+      3. The input fields should be cleared and focused, 
+        ready for the next item entry. -->
+</head>
+
+<body>
+    <h1>My Shopping list</h1>
+    <form>
+        <label for="item">Enter a new item:</label>
+        <input type="text" name="item" id="item">
+        <button>Add item</button>
+    </form>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        // creating variables to hold the elements
+        const list = document.querySelector("ul");
+        const ipt = document.querySelector("input");
+        const btn = document.querySelector("button");
+
+        // function that runs when button is clicked
+        function addItem(e) {
+            // preventa the form from refreshing the page when pressing Enter key
+            e.preventDefault();
+            const inputValue = ipt.value;
+            ipt.value = "";
+
+            // create 3 more to store them in variables
+            const lis = document.createElement("li");
+            const span = document.createElement("span");
+            const delbtn = document.createElement("button");
+
+            span.textContent = inputValue;
+            delbtn.textContent = "Delete";
+
+            lis.appendChild(span);
+            lis.appendChild(delbtn);
+
+            list.appendChild(lis); // show it on the page
+
+            delbtn.addEventListener('click', ()=> {
+                lis.remove();
+            });
+
+            ipt.focus();
+        }
+
+        btn.addEventListener('click', addItem);
+
+    </script>
+</body>
+
+</html>
